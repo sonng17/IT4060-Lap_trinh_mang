@@ -47,16 +47,6 @@ int main(int argc, char *argv[]) {
     sprintf(buf, "%s;%s", file_name, buffer);
     send(client_sock,buf,sizeof(buf),0);
 
-    int read_size;
-    while ((read_size = fread(buf, 1, sizeof(buf), fp)) > 0) {
-        if (send(client_sock, buf, read_size, 0) != read_size) {
-            printf("Failed to send data to server.\n");
-            fclose(fp);
-            close(client_sock);
-            return 1;
-        }
-    }
-
     // Close file and socket
     fclose(fp);
     close(client_sock);
